@@ -12,14 +12,14 @@ Navigate to the project directory in your terminal.
 
 ## Install dependencies:
 
-```
+```bash
 npm install
 
 ```
 Running the Server
 Start the development server:
 
-```
+```bash
 node backend/server.js
 ```
 
@@ -28,7 +28,7 @@ This will start the server on the default port (usually 3000).
 Building the Widget
 Build the widget bundle:
 
-```
+```bash
 npx webpack
 ```
 This will create a widget.js file in the dist directory.
