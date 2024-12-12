@@ -20,7 +20,7 @@ Running the Server
 Start the development server:
 
 ```
-node server.js
+node backend/server.js
 ```
 
 This will start the server on the default port (usually 3000).
