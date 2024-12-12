@@ -1,18 +1,18 @@
-Project Setup
+# Project Setup
 
 **Prerequisites:**
 
 Node.js and npm (or yarn) installed on your system.
-Installation:
+
+## Installation:
 
 **Clone this repository.**
 
 Navigate to the project directory in your terminal.
 
-##Install dependencies:##
+## Install dependencies:
 
-```Bash
-
+```
 npm install
 
 ```
@@ -28,10 +28,8 @@ This will start the server on the default port (usually 3000).
 Building the Widget
 Build the widget bundle:
 
-```Bash
-
+```
 npx webpack
-
 ```
 This will create a widget.js file in the dist directory.
 
