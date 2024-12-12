@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+#Project Setup
+##Prerequisites:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Node.js and npm (or yarn) installed on your system.
+Installation:
 
-## Available Scripts
+**Clone this repository.**
 
-In the project directory, you can run:
+Navigate to the project directory in your terminal.
 
-### `npm start`
+##Install dependencies:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```Bash
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+npm install
+Running the Server
+Start the development server:
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+node server.js
+This will start the server on the default port (usually 3000).
 
-### `npm run build`
+Building the Widget
+Build the widget bundle:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```Bash
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npx webpack
+This will create a widget.js file in the dist directory.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Embedding the Widget
+1. Host the widget.js file:
 
-### `npm run eject`
+Upload the widget.js file to a web server.
+Replace 'widget.js' in the embed script with the actual URL of the hosted file.
+2. Add the Embed Script to Your Website:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Copy and paste the following code into your HTML:
+HTML
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<script>
+    function embedWidget() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.async = true;
+        script.src = 'https://your-domain/widget.js'; // Replace with your actual URL
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(script, s);
+    }
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    window.businessId = 1; // Replace 1 with your desired business ID
+    embedWidget();
+</script>
+<div id="root"></div>
+Replace https://your-domain/widget.js with the actual URL of your hosted widget.js file.
+The widget will be rendered within the div with the ID root.
+Additional Notes:
+Configuration: You can customize the widget's behavior by passing additional parameters to the embedWidget function or by modifying the widget.js file.
+Security: Ensure that your server is secure and that your widget doesn't introduce vulnerabilities to the websites where it's embedded.
+Error Handling: Implement error handling in your backend and frontend code to gracefully handle potential issues.
+Optimization: Optimize your widget's performance by minifying and compressing the widget.js file.
+By following these steps, you can effectively embed your widget on different websites and customize its behavior to suit your specific needs.
