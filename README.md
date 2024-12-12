@@ -1,4 +1,5 @@
-#Project Setup#
+Project Setup
+
 **Prerequisites:**
 
 Node.js and npm (or yarn) installed on your system.
@@ -64,7 +65,7 @@ Replace https://your-domain/widget.js with the actual URL of your hosted widget.
 
 The widget will be rendered within the div with the ID root.
 
-###Additional Notes:
+Additional Notes:
 
 Configuration: You can customize the widget's behavior by passing additional parameters to the embedWidget function or by modifying the widget.js file.
 Security: Ensure that your server is secure and that your widget doesn't introduce vulnerabilities to the websites where it's embedded.
