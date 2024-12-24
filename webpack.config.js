@@ -2,10 +2,14 @@ const path = require('path');
 
 module.exports = {
     mode: 'production',
-    entry: './src/index.js', // Replace 'src/Widget.jsx' with the actual path to your component
+    entry: './src/index.js',
     output: {
         filename: 'widget.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        // Important for libraries/widgets:
+        library: 'ChuzedayWidget', 
+        libraryTarget: 'umd', // Universal Module Definition (works in browsers and Node.js)
+        globalObject: 'this', // Important for UMD builds in browser and node
     },
     module: {
         rules: [
@@ -15,10 +19,16 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react']
+                        presets: [
+                            ['@babel/preset-env', { targets: "defaults" }], // or specify browser targets
+                            ['@babel/preset-react', { runtime: 'automatic' }] // This is the key change!
+                        ]
                     }
                 }
             }
         ]
+    },
+    resolve: {
+        extensions: ['.js', '.jsx'],
     }
 };
