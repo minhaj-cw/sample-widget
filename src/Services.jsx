@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
-import T1 from '../src/images/arrowdn.png';
-import T2 from '../src/images//arrowS.png';
-import ArrowRight from '../src/images/arrowR.png';
+import T1 from '../src/assets/images/arrowdn.png';
+import T2 from '../src/assets/images/arrowS.png';
+import ArrowRight from '../src/assets/images/arrowR.png';
 import CartBtn from './CartBtn';
 import { motion, AnimatePresence } from "framer-motion"
 const Services = ({ content, onAdd, addBack, currency, defaultCartIcon }) => {

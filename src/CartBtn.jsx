@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import CartIcon from '../src/images/addCart.png';
+import CartIcon from '../src/assets/images/addCart.png';
 import dayjs from 'dayjs';
 import { CartList } from './Widget';
 const CartBtn = ({ onAdd, details, addBack, service_group, defaultCartIcon }) => {
