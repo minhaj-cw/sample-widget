@@ -1,38 +1,560 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: glacialIndifRegular;
+  src: url(../src/assets/fonts/GlacialIndifference-Regular.otf);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: glacialIndifBold;
+  src: url(../src/assets/fonts/GlacialIndifference-Bold.otf);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Basic Setup starts */
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+:root {
+  --glacialIndifReg: glacialIndifRegular;
+  --glacialIndifBold: glacialIndifBold;
+  --turquoise: #14f2f8;
+  --yellow: #ebc11a;
+  --blue2: #5c91b6;
+  --blue3: #1b7895;
+  --blue1: #37a1d2;
+  --light: #ffffff;
+  --dark: #000000;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'glacialIndifRegular', 'glacialIndifBold', sans-serif !important;
+}
+
+.font-chzday {
+  font-size: 16px;
+}
+
+.banner-text-inner h1 {
+  font-family: 'glacialIndifBold', sans-serif;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+  font-family: 'glacialIndifRegular', sans-serif;
+}
+
+ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+a {
+  text-decoration: none !important;
+  font-size: 1.6rem;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+p {
+  color: #707070;
+  font-size: 1.6rem;
+}
+
+h4 {
+  font-size: 2.5rem;
+}
+
+.tooltip {
+  font-size: 16px !important;
+}
+
+span {
+  font-size: 1.6rem;
+}
+
+.location-inner span {
+  font-size: 14px;
+}
+
+.Toastify__toast-body {
+  text-transform: capitalize;
+}
+
+.g-profile-container {
+  min-height: 75vh;
+}
+
+.modal-header {
+  padding: 1rem 2rem !important;
+}
+
+.modal-title {
+  font-size: 2.5rem !important;
+}
+
+.modal-header .btn-close {
+  font-size: 1.6rem !important;
+}
+
+.modal-body {
+  padding: 2rem !important;
+}
+
+/* Shop services starts */
+#ShopServicesRoot {
+  padding-top: 5rem;
+}
+
+#ShopServicesRoot .sectionHeading {
+  padding-left: 0;
+  margin-bottom: 2rem;
+}
+
+.subCategories {
+  width: 100%;
+}
+
+.category {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 1.2rem;
+  cursor: pointer;
+  /* background-color: #f3f2f3; */
+}
+
+.SubCategory .btn i {
+  color: var(--blue1);
+}
+
+.category.show-category {
+  cursor: pointer;
+  padding: 5px;
+  padding-bottom: 10px;
+}
+
+.category h5 {
+  font-size: 2rem;
+  margin-bottom: 0;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.category.show-category h5 {
+  margin-bottom: -10px;
+}
+
+.SubCategory {
+  line-height: 3;
+  font-weight: 600;
+  padding: 5px 0;
+}
+
+.SubCategory .name,
+.SubCategory .price {
+  display: flex;
+  align-items: center;
+}
+
+.SubCategory .price span {
+  color: #0D0307;
+  font-size: 1.8rem;
+}
+
+.sp-price {
+  color: red;
+  text-decoration: line-through
+}
+
+.SubCategory .name span {
+  color: #0D0307;
+  text-align: left;
+}
+
+.SubCategory span {
+  line-height: 1.5;
+}
+
+.SubCategory .name img,
+.SubCategory .price img {
+  width: 2rem;
+}
+
+.SubCategory .name .price {
+  display: flex;
+  align-items: center;
+}
+
+.CartIcon {
+  text-align: right;
+  padding-right: 1rem;
+}
+
+.category img {
+  width: 2.2rem;
+}
+
+.CartIcon img {
+  width: 3.3rem;
+  cursor: pointer;
+}
+
+.cartInner {
+  background: #f3f2f3;
+  text-align: center;
+  border-radius: 3.5rem;
+  padding: 6rem 2.5rem 2.5rem;
+  box-shadow: 0 10px 6px -6px #777;
+}
+
+.cartInner h3 {
+  color: var(--yellow);
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-transform: capitalize;
+}
+
+.cartInner h2 {
+  color: var(--blue1);
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.cartInner h2::after {
+  background: #70707021;
+  position: absolute;
+  left: 0;
+  width: 19.5rem;
+  height: .1rem;
+  content: "";
+  right: 0;
+  margin: auto;
+  top: 4.8rem;
+}
+
+.Category .default-text {
+  font-size: 1.6rem;
+}
+
+.cartInner .Category,
+.totalCost {
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 .4rem 0 rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+}
+
+.cartPrice,
+.vatamonunt {
+  display: flex;
+  align-items: center;
+  margin: .5rem 0;
+}
+
+.cartInner .Category .cartName {
+  margin: .5rem 0;
+  text-align: left;
+  font-size: 14px;
+}
+
+.cartInner .Category .closeIcon {
+  box-shadow: 0 0 .4rem 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  width: 2rem;
+  text-align: center;
+  display: inline-block;
+  line-height: 2rem;
+  margin: .5rem 0;
+}
+
+.cartName span {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cartPrice span,
+.vatamonunt span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cartPrice img,
+.vatamonunt img {
+  width: 14px;
+}
+
+.closeIcon {
+  box-shadow: 0 0 .4rem 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  width: 2rem;
+  text-align: center;
+  display: inline-block;
+  line-height: 2rem;
+}
+
+.closeIcon img {
+  width: 2rem;
+}
+
+.cartVat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 5px;
+}
+
+.totalCost {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cartVat span.vatinfo {
+  color: #0d0307;
+  line-height: 2;
+}
+
+.arrowTop img {
+  width: 3rem;
+  cursor: pointer;
+}
+
+.cartCheckBtn .primaryBtn {
+  margin-right: 10.5rem;
+  font-size: 1.8rem;
+  display: block;
+  width: 13rem;
+  border-radius: 1rem !important;
+  padding: .8rem 0;
+  background: var(--blue1);
+  border-color: var(--blue1);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Select time starts */
+.cartInner {
+  background: #f3f2f3;
+  text-align: center;
+  border-radius: 3.5rem;
+  padding: 6rem 2.5rem 2.5rem;
+  box-shadow: 0 10px 6px -6px #777;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cartInner h3 {
+  color: var(--yellow);
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-transform: capitalize;
 }
+
+.cartInner h2 {
+  color: var(--blue1);
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.cartInner h2::after {
+  background: #70707021;
+  position: absolute;
+  left: 0;
+  width: 19.5rem;
+  height: .1rem;
+  content: "";
+  right: 0;
+  margin: auto;
+  top: 4.8rem;
+}
+.cartInner .Category,
+.totalCost {
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 .4rem 0 rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+}
+.cartInner .Category .cartName {
+  margin: .5rem 0;
+  text-align: left;
+  font-size: 14px;
+}
+
+.cartInner .Category .closeIcon {
+  box-shadow: 0 0 .4rem 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  width: 2rem;
+  text-align: center;
+  display: inline-block;
+  line-height: 2rem;
+  margin: .5rem 0;
+}
+.cartItems {
+  height: 200px;
+  width: 100%;
+}
+/* -----------custom datepicker-------------- */
+.custom-datepicker {
+  box-shadow: 0 3px 10px rgb(0 0 0/.2);
+  width: 415px;
+}
+
+.react-datepicker {
+  font-size: 14px !important;
+  border: none !important;
+  border-right: 5px groove #cfddef !important;
+  width: 315px;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker__time-name {
+  width: 4rem !important;
+  line-height: 4rem !important;
+}
+
+.react-datepicker__day {
+  color: green !important;
+}
+
+.react-datepicker__day--selected {
+  color: white !important;
+}
+
+.react-datepicker__day--disabled,
+.react-datepicker__month-text--disabled,
+.react-datepicker__quarter-text--disabled,
+.react-datepicker__year-text--disabled {
+  color: #ccc !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  font-size: 16px !important;
+}
+
+.react-datepicker__header {
+  background-color: #cfddef !important;
+  border-bottom: none !important;
+  border-radius: 0 !important;
+  width: 310px;
+}
+
+.react-datepicker__year-read-view--down-arrow,
+.react-datepicker__month-read-view--down-arrow,
+.react-datepicker__month-year-read-view--down-arrow,
+.react-datepicker__navigation-icon::before {
+  border-color: white !important;
+  top: 12px !important;
+}
+
+.react-datepicker__navigation-icon--next {
+  left: -10px !important;
+}
+
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected,
+.react-datepicker__quarter-text--keyboard-selected,
+.react-datepicker__year-text--keyboard-selected {
+  background-color: #3dcc4a !important;
+  font-weight: 600 !important;
+}
+
+.react-datepicker__day--highlighted,
+.react-datepicker__month-text--highlighted,
+.react-datepicker__quarter-text--highlighted,
+.react-datepicker__year-text--highlighted {
+  background-color: red !important;
+  font-weight: 600 !important;
+  color: white !important;
+}
+
+.react-datepicker__day--highlighted:hover,
+.react-datepicker__month-text--highlighted:hover,
+.react-datepicker__quarter-text--highlighted:hover,
+.react-datepicker__year-text--highlighted:hover {
+  background-color: red !important;
+}
+
+.chuzy-time {
+  width: 100px;
+}
+
+.calendar-wrap {
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+}
+
+.available-time {
+  display: block !important;
+  height: 293px;
+  width: 100px;
+  padding: 10px;
+  padding-right: 0;
+}
+
+.available-time label {
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px;
+  font-weight: 600;
+}
+
+.modal-body .form-check-input {
+  cursor: pointer;
+  height: 14px;
+  width: 14px;
+  border: 1px solid var(--blue1);
+}
+
+.modal-body .form-check-input:checked[type="radio"] {
+  height: 14px;
+  width: 14px;
+}
+
+.person-select .form-check-input {
+  border: 1px solid var(--blue1);
+}
+
+.person-select .form-check-input:checked,
+.modal-body .form-check-input:checked {
+  background-color: var(--blue1);
+  border-color: var(--blue1);
+}
+
+.select-time-btn-wrap {
+  display: block;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.select-time-btn-wrap a {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+/* Select time ends */

@@ -4,6 +4,7 @@ import T2 from '../src/assets/images/arrowS.png';
 import ArrowRight from '../src/assets/images/arrowR.png';
 import CartBtn from './CartBtn';
 import { motion, AnimatePresence } from "framer-motion"
+import ToggleDescription from './ToggleDescription';
 const Services = ({ content, onAdd, addBack, currency, defaultCartIcon }) => {
     const [visible, setVisible] = useState(false);
     const [show, setShow] = useState(false);
@@ -72,20 +73,20 @@ const Services = ({ content, onAdd, addBack, currency, defaultCartIcon }) => {
                         defaultCartIcon={defaultCartIcon}
                       />
                     </div>
-                  	{/* {services?.description &&
+                  	{services?.description &&
                       <ToggleDescription
                       	desc={services?.description}
                       	schedule={services.service_group?.schedules ?? []}
                       	service_schedules={services.service_schedules}
                         service_group = {services.service_group}
                        />
-                  	} */}
+                  	}
                 	</div>
               	))
             	)
             })
           )}
-          </motion.div>
+        </motion.div>
       }
       </AnimatePresence>
     </div>
