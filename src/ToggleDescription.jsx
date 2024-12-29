@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { AnimatePresence, motion } from "framer-motion";
 import { Fragment, useState } from "react";
+import InfoIcon from "../src/assets/images/info.png";
 
 const ToggleDescription = ({
   desc,
@@ -25,7 +26,7 @@ const ToggleDescription = ({
             handleShow();
           }}
         >
-          <i className="fa fa-info-circle fa-2x" />
+          <img className="info-img" src={InfoIcon} alt="icon" />
         </button>
       </div>
       <AnimatePresence>

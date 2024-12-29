@@ -10,7 +10,7 @@ import DateTimeModal from './DateTimeModal';
 
 export const CartList = createContext();
 
-function Widget({ businessId }) {
+function Widget({ businessId }) { 
   // const [businessData, setBusinessData] = useState(null);
   // const [error, setError] = useState(null);
   // useEffect(() => {
@@ -317,7 +317,7 @@ function Widget({ businessId }) {
                 show={show}
                 onHide={handleClose}
               >
-                <Modal.Header >
+                <Modal.Header closeButton>
                   <Modal.Title>Select date and time</Modal.Title>
                 </Modal.Header>
                 <DateTimeModal

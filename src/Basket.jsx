@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CloseIcon from "../src/assets/images/close.png";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 export default function Basket({ content, onRemove, inc, dec, currency }) {
   const [qty, setQty] = useState(1);
   useEffect(() => {
@@ -9,7 +9,7 @@ export default function Basket({ content, onRemove, inc, dec, currency }) {
     }
   }, [content]);
   return (
-    <>
+    <AnimatePresence>
       {content && (
         <motion.div
           className="service_content"
@@ -123,6 +123,6 @@ export default function Basket({ content, onRemove, inc, dec, currency }) {
           )}
         </motion.div>
       )}
-    </>
+    </AnimatePresence>
   );
 }
