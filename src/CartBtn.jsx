@@ -12,6 +12,7 @@ const isCourseVallidToAdd = is_course && (isEnrollDateValid || isStartDateValid)
 const isGroupVallidToAdd = is_group && !is_course && isStartDateValid;
   
   const ServiceAdd = () => {
+    console.log("ServiceAdd", details);
     setCurrentCartItem(
       {...details , 
         is_group:is_group, 

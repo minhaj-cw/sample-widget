@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Widget from './Widget.jsx';
-
+import './Widget.css'
 import { setContext } from '@apollo/client/link/context';
 import {
   ApolloClient,
@@ -53,8 +53,7 @@ const client = new ApolloClient({
   shouldBatch: true
 });
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-
+const root = ReactDOM.createRoot(document.getElementById('chuzeday_root'));
 root.render(
   <ApolloProvider client={client}>
     <Widget businessId={window.businessId} />

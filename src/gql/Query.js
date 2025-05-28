@@ -164,3 +164,14 @@ query single_business(
   }
 }
 `;
+
+
+export const BUSINESS_INFO = gql`
+query business_info($id: ID!){
+  business_info(id: $id){
+    id
+    name
+    slug
+  }
+}
+`;
