@@ -10,6 +10,11 @@ import DateTimeModal from './DateTimeModal';
 export const CartList = createContext();
 
 function Widget() { 
+  // get buisness id 
+  const root = document.getElementById("chuzeday_root");
+  const businessIdAttr = root?.getAttribute("data-business-id");
+  const businessId = businessIdAttr ? parseInt(businessIdAttr, 10) : 3;
+
   const [addBack, setAddBack] = useState(0);
   const [currency, setcurrency] = useState("");
   const [cartItems, setCartItems] = useState([]);
@@ -21,10 +26,13 @@ function Widget() {
   const [show, setShow] = useState(false);
   const [businessSlug, setBusinessSlug] = useState("");
   console.log("🚀 ~ Widget ~ businessSlug:", businessSlug)
+  console.log(
+    "🚀 ~ Widget ~ window.businessId", window.businessId);
+  console.log("🚀 ~ Widget ~ data-business-id:", businessId);
   // buisness details retrive
   const { data: businessDetails } = useQuery(BUSINESS_INFO, {
     variables: {
-      id: typeof window.businessId === "number" ? window.businessId : 3,
+      id: businessId,
     },
   });
   useEffect(() => {
@@ -54,7 +62,7 @@ function Widget() {
   } = useQuery(SERVICE_LIST, {
     variables: {
       type: "business",
-      business_id: typeof window.businessId === 'number' ? window.businessId : 3,
+      business_id: businessId,
     },
   });
   console.log("🚀 ~ Widget ~ service_cat:", service_cat)
@@ -197,7 +205,7 @@ function Widget() {
 
     const { error: slotError, refetch: slotRefetch } = useQuery(TIME_SLOT, {
       variables: {
-        business_id: parseInt(3),
+        business_id: businessId,
         date: date,
         services: "",
       },
@@ -235,67 +243,77 @@ function Widget() {
         console.log("slotError", slotError);
       }
     }, [data, shopLoading, gStatus, slotError]);
-    // handler continue button
-    const handleContinue = async () => {
-      // Check if crypto.subtle is available
-      if (!window.crypto || !window.crypto.subtle) {
-        console.error("❌ Web Crypto API not available");
-        console.log("Environment check:");
-        console.log("- window.crypto:", !!window.crypto);
-        console.log(
-          "- window.crypto.subtle:",
-          !!(window.crypto && window.crypto.subtle)
-        );
-        console.log("- Location protocol:", window.location.protocol);
-        console.log("- User agent:", navigator.userAgent);
-
-        // You could show an error message to the user here
-        alert(
-          "Secure crypto features are not available. Please ensure you're using HTTPS and a modern browser."
-        );
-        return;
-      }
-
-      try {
-        const baseUrl = `http://${businessSlug}.chuzeday.test`;
-        console.log("🚀 ~ handleContinue ~ baseUrl:", baseUrl);
-
-        const json = JSON.stringify(cartItems);
-        const base64Payload = btoa(json); // encodes to ASCII-safe string
-
-        const signatureInput = base64Payload + businessSlug;
-
-        // Wrap crypto operation in try-catch
-        const buffer = await window.crypto.subtle.digest(
-          "SHA-256",
-          new TextEncoder().encode(signatureInput)
-        );
-
-        const hashArray = Array.from(new Uint8Array(buffer));
-        const hashHex = hashArray
-          .map((b) => b.toString(16).padStart(2, "0"))
-          .join("");
-
-        const url = `${baseUrl}/?cc=${encodeURIComponent(
-          base64Payload
-        )}&sig=${hashHex}`;
-
-        console.log("Generated secure URL:", url);
-        window.location.href = url;
-      } catch (error) {
-        console.error("❌ Crypto operation failed:", error);
-        console.log("Error details:", {
-          name: error.name,
-          message: error.message,
-          stack: error.stack,
-        });
-
-        // Handle the error gracefully
-        alert(
-          "Failed to generate secure URL. Please try again or contact support."
-        );
-      }
+    // local url hander for local environment
+    const handleContinue = () => {
+      const baseUrl = `http://${businessSlug}.chuzeday.test`;
+      const json = JSON.stringify(cartItems);
+      const base64Data = btoa(json); // Base64 encode
+      const finalUrl = `${baseUrl}/?cc=${encodeURIComponent(base64Data)}`;
+      
+      window.location.href = finalUrl; // to navigate
     };
+  
+    // handler continue button with encryption url by crypto api work only https protocol.
+    // const handleContinue = async () => {
+    //   // Check if crypto.subtle is available
+    //   if (!window.crypto || !window.crypto.subtle) {
+    //     console.error("❌ Web Crypto API not available");
+    //     console.log("Environment check:");
+    //     console.log("- window.crypto:", !!window.crypto);
+    //     console.log(
+    //       "- window.crypto.subtle:",
+    //       !!(window.crypto && window.crypto.subtle)
+    //     );
+    //     console.log("- Location protocol:", window.location.protocol);
+    //     console.log("- User agent:", navigator.userAgent);
+
+    //     // You could show an error message to the user here
+    //     alert(
+    //       "Secure crypto features are not available. Please ensure you're using HTTPS and a modern browser."
+    //     );
+    //     return;
+    //   }
+
+    //   try {
+    //     const baseUrl = `http://${businessSlug}.chuzeday.test`;
+    //     console.log("🚀 ~ handleContinue ~ baseUrl:", baseUrl);
+
+    //     const json = JSON.stringify(cartItems);
+    //     const base64Payload = btoa(json); // encodes to ASCII-safe string
+
+    //     const signatureInput = base64Payload + businessSlug;
+
+    //     // Wrap crypto operation in try-catch
+    //     const buffer = await window.crypto.subtle.digest(
+    //       "SHA-256",
+    //       new TextEncoder().encode(signatureInput)
+    //     );
+
+    //     const hashArray = Array.from(new Uint8Array(buffer));
+    //     const hashHex = hashArray
+    //       .map((b) => b.toString(16).padStart(2, "0"))
+    //       .join("");
+
+    //     const url = `${baseUrl}/?cc=${encodeURIComponent(
+    //       base64Payload
+    //     )}&sig=${hashHex}`;
+
+    //     console.log("Generated secure URL:", url);
+    //     window.location.href = url;
+    //   } catch (error) {
+    //     console.error("❌ Crypto operation failed:", error);
+    //     console.log("Error details:", {
+    //       name: error.name,
+    //       message: error.message,
+    //       stack: error.stack,
+    //     });
+
+    //     // Handle the error gracefully
+    //     alert(
+    //       "Failed to generate secure URL. Please try again or contact support."
+    //     );
+    //   }
+    // };
 
   return (
     <CartList.Provider
